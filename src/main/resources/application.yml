@@ -1,11 +1,18 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/taskflow?createDatabaseIfNotExist=true
-    username: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/taskflow
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+
+logging:
+  level:
+    org.springframework.security: trace
