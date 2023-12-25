@@ -15,6 +15,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
 
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+    default-schema: liquibase_db
+
 logging:
   level:
     org.springframework.security: trace
