@@ -7,17 +7,16 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
-
   liquibase:
-    change-log: classpath:/db/changelog/master.xml
-    default-schema: liquibase_db
+    change-log: db/master.xml
+
 
 logging:
   level:
