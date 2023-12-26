@@ -13,7 +13,8 @@ public class Task {
     private Long id;
     private String title;
     private String description;
-    private LocalDate dueDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private TaskStatus taskStatus;
     @ManyToMany
     @JoinTable(
