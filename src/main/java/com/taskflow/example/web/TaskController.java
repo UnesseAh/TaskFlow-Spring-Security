@@ -19,10 +19,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Task task){
-        return ResponseEntity.ok(taskService.save(task));
+    public String save(){
+        return "task saved";
     }
-
-
 
 }
