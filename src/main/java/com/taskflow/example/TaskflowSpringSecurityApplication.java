@@ -1,6 +1,7 @@
 package com.taskflow.example;
 
 import com.taskflow.example.model.AppUser;
+import com.taskflow.example.model.Tag;
 import com.taskflow.example.model.enums.Role;
 import com.taskflow.example.repository.UserRepository;
 import org.apache.catalina.User;
@@ -9,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.List;
 
 @SpringBootApplication
 public class TaskflowSpringSecurityApplication implements CommandLineRunner {

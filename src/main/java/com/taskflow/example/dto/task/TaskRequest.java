@@ -1,11 +1,14 @@
 package com.taskflow.example.dto.task;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taskflow.example.dto.tag.TagRequest;
+import com.taskflow.example.model.Tag;
 import com.taskflow.example.model.Task;
 import com.taskflow.example.model.enums.TaskStatus;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record TaskRequest(
         @NotBlank(message = "Task title is required")
@@ -22,7 +25,8 @@ public record TaskRequest(
         LocalDate endDate,
         @NotBlank(message = "Task status is required")
         @Pattern(regexp = "^(COMPLETED|IN_PROGRESS|OVERDUE)$", message = "Task status must be of type COMPLETED, IN PROGRESS, or OVERDUE")
-        String taskStatus
+        String taskStatus,
+        List<Integer> tags
 ) {
     public Task toTask(){
         return Task.builder()
