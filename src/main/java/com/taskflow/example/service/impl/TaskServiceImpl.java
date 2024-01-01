@@ -2,9 +2,11 @@ package com.taskflow.example.service.impl;
 
 import com.taskflow.example.model.Tag;
 import com.taskflow.example.model.Task;
+import com.taskflow.example.model.enums.TaskStatus;
 import com.taskflow.example.repository.TagRepository;
 import com.taskflow.example.repository.TaskRepository;
 import com.taskflow.example.service.TaskService;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -54,6 +56,17 @@ public class TaskServiceImpl implements TaskService {
 
 
         return taskRepository.save(task);
+    }
+
+    @Scheduled(cron = "0 0 0 * * *")
+    public void markTaskAsCompleted(){
+        LocalDate currentDate = LocalDate.now();
+        List<Task> overdueTasks = taskRepository.findByEndDateBeforeAndTaskStatusNot(currentDate, TaskStatus.COMPLETED);
+
+        for (Task task : overdueTasks) {
+            task.setTaskStatus(TaskStatus.COMPLETED);
+        }
+        taskRepository.saveAll(overdueTasks);
     }
 
     @Override
