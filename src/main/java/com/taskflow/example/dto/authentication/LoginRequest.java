@@ -1,4 +1,4 @@
-package com.taskflow.example.dto.request;
+package com.taskflow.example.dto.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignInRequest {
+public class LoginRequest {
     private String email;
     private String password;
 }

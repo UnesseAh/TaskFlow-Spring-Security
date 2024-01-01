@@ -1,6 +1,7 @@
 package com.taskflow.example.service.impl;
 
-import com.taskflow.example.dto.request.SignUpRequest;
+import com.taskflow.example.dto.authentication.AuthenticationResponse;
+import com.taskflow.example.dto.authentication.RegisterRequest;
 import com.taskflow.example.service.AuthenticationService;
 import com.taskflow.example.service.JwtService;
 import com.taskflow.example.model.AppUser;
@@ -21,7 +22,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public AppUser register(SignUpRequest request) {
+    public AuthenticationResponse register(RegisterRequest request) {
         AppUser user = AppUser.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
@@ -29,25 +30,25 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(Role.USER)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
-        return userRepository.save(user);
-//        var jwtToken = jwtService.generateToken(user);
-//        return AuthenticationResponse.builder()
-//                .token(jwtToken)
-//                .build();
+         userRepository.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
     }
 
-//    @Override
-//    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        request.getEmail(),
-//                        request.getPassword()
-//                )
-//        );
-//        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-//        var jwtToken = jwtService.generateToken(user);
-//        return AuthenticationResponse.builder()
-//                .token(jwtToken)
-//                .build();
-//    }
+    @Override
+    public AuthenticationResponse authenticate(RegisterRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
 }

@@ -1,11 +1,11 @@
 package com.taskflow.example.service;
 
 
-import com.taskflow.example.dto.request.SignUpRequest;
-import com.taskflow.example.model.AppUser;
+import com.taskflow.example.dto.authentication.RegisterRequest;
+import com.taskflow.example.dto.authentication.AuthenticationResponse;
 
 public interface AuthenticationService {
-    AppUser register(SignUpRequest request);
+    AuthenticationResponse register(RegisterRequest request);
 
-//    AuthenticationResponse authenticate(AuthenticationRequest request);
+    AuthenticationResponse authenticate(RegisterRequest request);
 }

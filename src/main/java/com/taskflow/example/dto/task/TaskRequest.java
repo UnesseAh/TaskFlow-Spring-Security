@@ -24,7 +24,7 @@ public record TaskRequest(
         LocalDate endDate,
         @NotBlank(message = "Task status is required")
         @Pattern(regexp = "^(COMPLETED|IN_PROGRESS|OVERDUE)$", message = "Task status must be of type COMPLETED, IN PROGRESS, or OVERDUE")
-        TaskStatus taskStatus
+        String taskStatus
 ) {
     public Task toTask(){
         return Task.builder()
@@ -32,7 +32,7 @@ public record TaskRequest(
                 .description(description)
                 .startDate(startDate)
                 .endDate(endDate)
-                .taskStatus(taskStatus)
+                .taskStatus(TaskStatus.valueOf(taskStatus))
                 .build();
     }
 }

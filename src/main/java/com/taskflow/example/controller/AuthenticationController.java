@@ -1,7 +1,7 @@
 package com.taskflow.example.controller;
 
-import com.taskflow.example.dto.request.SignUpRequest;
-import com.taskflow.example.model.AppUser;
+import com.taskflow.example.dto.authentication.RegisterRequest;
+import com.taskflow.example.dto.authentication.AuthenticationResponse;
 import com.taskflow.example.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AppUser> register(@RequestBody SignUpRequest signUpRequest){
-        return ResponseEntity.ok(authenticationService.register(signUpRequest));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest registerRequest){
+        return ResponseEntity.ok(authenticationService.register(registerRequest));
     }
 
-//    @PostMapping("/authenticate")
-//    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
-//        return ResponseEntity.ok(authenticationService.authenticate(request));
-//
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody RegisterRequest request){
+        return ResponseEntity.ok(authenticationService.authenticate(request));
+
+    }
 }
