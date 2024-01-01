@@ -1,5 +1,6 @@
 package com.taskflow.example.service.impl;
 
+import com.taskflow.example.model.Tag;
 import com.taskflow.example.model.Task;
 import com.taskflow.example.repository.TagRepository;
 import com.taskflow.example.repository.TaskRepository;
@@ -7,6 +8,7 @@ import com.taskflow.example.service.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,6 +46,12 @@ public class TaskServiceImpl implements TaskService {
         if(tagList.size() <= 1){
             throw new IllegalArgumentException("You must enter more than one tag");
         }
+
+        List<Tag> tagsToSave = new ArrayList<>();
+        tagList.forEach(tag -> tagsToSave.add(tagRepository.findById(Long.valueOf(tag)).get()));
+
+        task.setTags(tagsToSave);
+
 
         return taskRepository.save(task);
     }
