@@ -1,4 +1,4 @@
-package com.taskflow.example.web;
+package com.taskflow.example.controller;
 
 import com.taskflow.example.model.Task;
 import com.taskflow.example.service.TaskService;
@@ -19,8 +19,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public String save(){
-        return "task saved";
+    public ResponseEntity<?> save(@RequestBody Task task){
+        return ResponseEntity.ok(taskService.save(task));
     }
-
 }
