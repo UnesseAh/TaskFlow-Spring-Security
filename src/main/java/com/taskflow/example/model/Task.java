@@ -2,12 +2,13 @@ package com.taskflow.example.model;
 
 import com.taskflow.example.model.enums.TaskStatus;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name = "tasks")
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
+@Entity @Table(name = "tasks")
 public class Task {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
