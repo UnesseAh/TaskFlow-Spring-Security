@@ -15,11 +15,9 @@ public record TaskRequest(
         @Size(min = 2, max = 255, message = "Task description must be between 2 and 255 characters")
         String description,
         @NotNull(message = "Start date is required")
-        @Future(message = "Start date must be in the future")
         @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate startDate,
         @NotNull(message = "End date is required")
-        @Future(message = "End date must be in the future")
         @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate endDate,
         @NotBlank(message = "Task status is required")
