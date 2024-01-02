@@ -21,6 +21,7 @@ public class Task {
     private String description;
     private LocalDate startDate;
     private LocalDate endDate;
+    @Enumerated(EnumType.STRING)
     private TaskStatus taskStatus;
     @ManyToMany
     @JoinTable(

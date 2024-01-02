@@ -8,4 +8,5 @@ public interface TaskService {
     Task save(Task task, List<Integer> tagList);
     List<Task> getAll();
     void delete(Long id);
+    Task changeStatus(Task task);
 }

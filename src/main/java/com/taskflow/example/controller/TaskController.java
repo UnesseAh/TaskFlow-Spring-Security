@@ -1,6 +1,7 @@
 package com.taskflow.example.controller;
 
 import com.taskflow.example.dto.task.TaskRequest;
+import com.taskflow.example.dto.taskStatus.TaskStatusRequest;
 import com.taskflow.example.model.Task;
 import com.taskflow.example.service.TaskService;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +28,13 @@ public class TaskController {
         Task task = taskRequest.toTask();
         List<Integer> tagList = taskRequest.tags();
         return ResponseEntity.ok(taskService.save(task, tagList));
+    }
+
+    @PostMapping("/change-task-status")
+    public ResponseEntity<?> changeStatus(@RequestBody @Validated TaskStatusRequest taskStatusRequest){
+        Task task = taskStatusRequest.toTask();
+        return ResponseEntity.ok(taskService.changeStatus(task));
+
+
     }
 }
